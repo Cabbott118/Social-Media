@@ -15,7 +15,7 @@ import MuiLink from '@material-ui/core/Link';
 import LocationOn from '@material-ui/icons/LocationOn';
 import LinkIcon from '@material-ui/icons/Link';
 import CalendarToday from '@material-ui/icons/CalendarToday';
-import EditIcon from '@material-ui/icons/Edit';
+import AddAPhoto from '@material-ui/icons/AddAPhoto';
 import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
 
 // Redux
@@ -24,6 +24,9 @@ import { logoutUser, uploadImage } from '../../redux/actions/userActions';
 
 const styles = (theme) => ({
   ...theme.spreadThis,
+  logoutButton: {
+    float: 'right',
+  },
 });
 
 class Profile extends Component {
@@ -57,6 +60,14 @@ class Profile extends Component {
       authenticated ? (
         <Paper className={classes.paper}>
           <div className={classes.profile}>
+            <MyButton
+              className={classes.logoutButton}
+              tip='Logout'
+              onClick={this.handleLogout}
+            >
+              <KeyboardReturn color='primary' />
+            </MyButton>
+
             <div className='image-wrapper'>
               <img className='profile-image' src={imageUrl} alt='User' />
               <input
@@ -70,7 +81,7 @@ class Profile extends Component {
                 onClick={this.handleEditPicture}
                 btnClassName='button'
               >
-                <EditIcon color='primary' />
+                <AddAPhoto color='primary' />
               </MyButton>
             </div>
             <hr />
@@ -106,9 +117,6 @@ class Profile extends Component {
               <CalendarToday color='primary' />{' '}
               <span>Joined {dayjs(createdAt).format('MMM YYYY')}</span>
             </div>
-            <MyButton tip='Logout' onClick={this.handleLogout}>
-              <KeyboardReturn color='primary' />
-            </MyButton>
             <EditDetails />
           </div>
         </Paper>
