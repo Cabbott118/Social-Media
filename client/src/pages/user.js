@@ -35,6 +35,8 @@ class user extends Component {
       .catch((err) => console.log(err));
   }
   render() {
+    console.log('STATE:', this.state);
+    console.log('PROPS:', this.props);
     const { posts, loading } = this.props.data;
     const { postIdParam } = this.state;
 
@@ -54,15 +56,15 @@ class user extends Component {
 
     return (
       <Grid container spacing={2}>
-        <Grid item sm={8} xs={12}>
-          {postsMarkup}
-        </Grid>
         <Grid item sm={4} xs={12}>
           {this.state.profile === null ? (
             <ProfileSkeleton />
           ) : (
             <StaticProfile profile={this.state.profile} />
           )}
+        </Grid>
+        <Grid item sm={8} xs={12}>
+          {postsMarkup}
         </Grid>
       </Grid>
     );

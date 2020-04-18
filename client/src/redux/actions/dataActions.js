@@ -29,7 +29,6 @@ export const getPosts = () => (dispatch) => {
         type: SET_POSTS,
         payload: [],
       });
-      console.log(err);
     });
 };
 
