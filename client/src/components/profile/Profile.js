@@ -26,7 +26,10 @@ import { logoutUser, uploadImage } from '../../redux/actions/userActions';
 
 const styles = (theme) => ({
   ...theme.spreadThis,
-  logoutButton: {},
+  profileTop: {},
+  logoutButton: {
+    marginLeft: '85%',
+  },
 });
 
 class Profile extends Component {
@@ -60,6 +63,14 @@ class Profile extends Component {
       authenticated ? (
         <Paper className={classes.paper}>
           <div className={classes.profile}>
+            <div className={classes.profileTop}>
+              <EditDetails />
+              <div className={classes.logoutButton}>
+                <MyButton tip='Logout' onClick={this.handleLogout}>
+                  <ExitToApp color='secondary' />
+                </MyButton>
+              </div>
+            </div>
             <div className='image-wrapper'>
               <img className='profile-image' src={imageUrl} alt='User' />
               <input
@@ -109,14 +120,6 @@ class Profile extends Component {
               <CalendarToday color='primary' />{' '}
               <span>Joined {dayjs(createdAt).format('MMM YYYY')}</span>
             </div>
-            <EditDetails />
-            <MyButton
-              className={classes.logoutButton}
-              tip='Logout'
-              onClick={this.handleLogout}
-            >
-              <ExitToApp color='secondary' />
-            </MyButton>
           </div>
         </Paper>
       ) : (
