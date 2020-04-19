@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
-import MyButton from '../../util/MyButton';
 import LikeButton from './LikeButton';
 import DeletePost from './DeletePost';
 import PostDialog from './PostDialog';
-import CommentButton from './CommentButton';
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -19,9 +17,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-
-// Icons
-import ChatIcon from '@material-ui/icons/Chat';
 
 const styles = {
   card: {
@@ -87,16 +82,12 @@ export class Post extends Component {
           <Typography variant='body1'>{body}</Typography>
           <LikeButton postId={postId} />
           <span>{likeCount} Likes</span>
-          {/* <MyButton tip='Comment on post'>
-            <ChatIcon color='primary' />
-          </MyButton> */}
-          <CommentButton post={postId} userHandle={userHandle} />
-          <span>{commentCount} Comments</span>
           <PostDialog
             postId={postId}
             userHandle={userHandle}
             openDialog={this.props.openDialog}
           />
+          <span>{commentCount} Comments</span>
         </CardContent>
       </Card>
     );

@@ -17,7 +17,6 @@ import Typography from '@material-ui/core/Typography';
 
 // Icons
 import Close from '@material-ui/icons/Close';
-import UnfoldMore from '@material-ui/icons/UnfoldMore';
 import ChatIcon from '@material-ui/icons/Chat';
 
 // Redux
@@ -38,10 +37,6 @@ const styles = (theme) => ({
     cursor: 'pointer',
     position: 'absolute',
     left: '83%',
-  },
-  expandButton: {
-    position: 'absolute',
-    left: '85%',
   },
   spinnerDiv: {
     textAlign: 'center',
@@ -81,8 +76,8 @@ class PostDialog extends Component {
 
   handleClose = () => {
     window.history.pushState(null, null, this.state.oldPath);
-    this.setState({ open: false });
     this.props.clearErrors();
+    this.setState({ open: false });
   };
 
   render() {
@@ -139,12 +134,8 @@ class PostDialog extends Component {
 
     return (
       <Fragment>
-        <MyButton
-          onClick={this.handleOpen}
-          tip='Open post'
-          tipClassName={classes.expandButton}
-        >
-          <UnfoldMore color='primary' />
+        <MyButton onClick={this.handleOpen} tip='Comment on post'>
+          <ChatIcon color='primary' />
         </MyButton>
         <Dialog
           open={this.state.open}
