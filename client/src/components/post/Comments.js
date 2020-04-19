@@ -29,16 +29,16 @@ class Comments extends Component {
           const { body, createdAt, userImage, userHandle } = comment;
           return (
             <Fragment key={createdAt}>
-              <Grid item sm={12}>
+              <Grid style={{ minWidth: '100%' }} item sm={12}>
                 <Grid
                   style={{
                     backgroundColor: 'rgb(245, 245, 245)',
-                    padding: 10,
                     marginBottom: 10,
+                    padding: 10,
                   }}
                   container
                 >
-                  <Grid item sm={2}>
+                  <Grid item sm={3}>
                     <img
                       src={userImage}
                       alt='comment'
@@ -48,7 +48,7 @@ class Comments extends Component {
                   <Grid item sm={9}>
                     <div className={classes.commentData}>
                       <Typography
-                        variant='h5'
+                        variant='h6'
                         component={Link}
                         to={`/users/${userHandle}`}
                         color='primary'
