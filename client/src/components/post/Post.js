@@ -6,6 +6,7 @@ import MyButton from '../../util/MyButton';
 import LikeButton from './LikeButton';
 import DeletePost from './DeletePost';
 import PostDialog from './PostDialog';
+import CommentButton from './CommentButton';
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -86,9 +87,10 @@ export class Post extends Component {
           <Typography variant='body1'>{body}</Typography>
           <LikeButton postId={postId} />
           <span>{likeCount} Likes</span>
-          <MyButton tip='Comments'>
+          {/* <MyButton tip='Comment on post'>
             <ChatIcon color='primary' />
-          </MyButton>
+          </MyButton> */}
+          <CommentButton post={postId} userHandle={userHandle} />
           <span>{commentCount} Comments</span>
           <PostDialog
             postId={postId}
