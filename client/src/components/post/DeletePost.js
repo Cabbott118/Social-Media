@@ -4,10 +4,13 @@ import PropTypes from 'prop-types';
 import MyButton from '../../util/MyButton';
 
 // MUI
-import { Button, Dialog, DialogTitle, DialogActions } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogActions from '@material-ui/core/DialogActions';
 
 // Icons
-import { DeleteOutline } from '@material-ui/icons';
+import DeleteOutline from '@material-ui/icons/DeleteOutline';
 
 // Redux
 import { connect } from 'react-redux';

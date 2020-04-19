@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid';
 import Post from '../components/post/Post';
 import Profile from '../components/profile/Profile';
 import PropTypes from 'prop-types';
 import PostSkeleton from '../util/PostSkeleton';
+
+// MUI
+import Grid from '@material-ui/core/Grid';
 
 // Redux
 import { connect } from 'react-redux';
@@ -23,11 +25,11 @@ export class home extends Component {
     );
     return (
       <Grid container spacing={2}>
-        <Grid item sm={8} xs={12}>
-          {recentPostsMarkup}
-        </Grid>
         <Grid item sm={4} xs={12}>
           <Profile />
+        </Grid>
+        <Grid item sm={8} xs={12}>
+          {recentPostsMarkup}
         </Grid>
       </Grid>
     );

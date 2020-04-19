@@ -15,10 +15,17 @@ import Button from '@material-ui/core/Button';
 
 // Icons
 import HomeIcon from '@material-ui/icons/Home';
+import Person from '@material-ui/icons/Person';
+import PersonAdd from '@material-ui/icons/PersonAdd';
 
 export class Navbar extends Component {
   render() {
-    const { authenticated } = this.props;
+    const {
+      authenticated,
+      credentials: { handle },
+    } = this.props.user;
+
+    const userUrl = `/users/${handle}`;
 
     return (
       <AppBar>
@@ -31,19 +38,23 @@ export class Navbar extends Component {
                   <HomeIcon />
                 </MyButton>
               </Link>
-
+              <Link to={userUrl}>
+                <MyButton tip='Profile'>
+                  <Person />
+                </MyButton>
+              </Link>
               <Notifications />
             </Fragment>
           ) : (
             <Fragment>
               <Button color='inherit' component={Link} to='/'>
-                Home
+                <HomeIcon />
               </Button>
               <Button color='inherit' component={Link} to='/login'>
-                Login
+                <Person />
               </Button>
               <Button color='inherit' component={Link} to='/signup'>
-                Signup
+                <PersonAdd />
               </Button>
             </Fragment>
           )}
@@ -54,11 +65,11 @@ export class Navbar extends Component {
 }
 
 Navbar.propTypes = {
-  authenticated: PropTypes.bool.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  authenticated: state.user.authenticated,
+  user: state.user,
 });
 
 export default connect(mapStateToProps)(Navbar);

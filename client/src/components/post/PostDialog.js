@@ -9,13 +9,11 @@ import Comments from './Comments';
 import CommentForm from './CommentForm';
 
 // MUI
-import {
-  Dialog,
-  DialogContent,
-  CircularProgress,
-  Grid,
-  Typography,
-} from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 // Icons
 import Close from '@material-ui/icons/Close';

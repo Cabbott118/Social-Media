@@ -53,6 +53,9 @@ export default {
     paper: {
       padding: 20,
     },
+    accountForm: {
+      margin: '0px 20px 0px 20px',
+    },
     profile: {
       '& .image-wrapper': {
         textAlign: 'center',

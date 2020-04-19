@@ -84,7 +84,7 @@ class Notifications extends Component {
               {icon}
               <Typography
                 component={Link}
-                color='default'
+                color='primary'
                 variant='body1'
                 to={`/users/${not.recipient}/post/${not.postId}`}
               >

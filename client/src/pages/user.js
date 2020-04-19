@@ -35,8 +35,6 @@ class user extends Component {
       .catch((err) => console.log(err));
   }
   render() {
-    console.log('STATE:', this.state);
-    console.log('PROPS:', this.props);
     const { posts, loading } = this.props.data;
     const { postIdParam } = this.state;
 

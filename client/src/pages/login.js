@@ -8,13 +8,11 @@ import { connect } from 'react-redux';
 import { loginUser } from '../redux/actions/userActions';
 
 // MUI
-import {
-  Button,
-  Grid,
-  CircularProgress,
-  TextField,
-  Typography,
-} from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = (theme) => ({
   ...theme.spreadThis,
@@ -68,7 +66,11 @@ export class login extends Component {
           <Typography variant='h3' className={classes.pageTitle}>
             Login
           </Typography>
-          <form noValidate onSubmit={this.handleSubmit}>
+          <form
+            className={classes.accountForm}
+            noValidate
+            onSubmit={this.handleSubmit}
+          >
             <TextField
               id='email'
               name='email'
