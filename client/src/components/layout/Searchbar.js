@@ -39,9 +39,6 @@ class Searchbar extends Component {
 
     if (userInput === '') return false;
     else window.location.href = `/users/${userInput}`;
-    if ((window.location.href = 404)) {
-      console.log('deal with err');
-    }
   };
 
   handleChange = (e) => {
