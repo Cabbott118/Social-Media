@@ -59,6 +59,13 @@ export class Post extends Component {
       authenticated && userHandle === handle ? (
         <DeletePost postId={postId} />
       ) : null;
+
+    const likePlural =
+      likeCount === 1 ? <span> Like</span> : <span> Likes</span>;
+
+    const commentPlural =
+      commentCount === 1 ? <span> Comment</span> : <span> Comments</span>;
+
     return (
       <Card className={classes.card}>
         <CardMedia
@@ -81,13 +88,17 @@ export class Post extends Component {
           </Typography>
           <Typography variant='body1'>{body}</Typography>
           <LikeButton postId={postId} />
-          <span>{likeCount} Likes</span>
+          <span>
+            {likeCount} {likePlural}
+          </span>
           <PostDialog
             postId={postId}
             userHandle={userHandle}
             openDialog={this.props.openDialog}
           />
-          <span>{commentCount} Comments</span>
+          <span>
+            {commentCount} {commentPlural}
+          </span>
         </CardContent>
       </Card>
     );
