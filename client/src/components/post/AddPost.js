@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 
 // Icons
-import AddIcon from '@material-ui/icons/Add';
+import PostAdd from '@material-ui/icons/PostAdd';
 import Close from '@material-ui/icons/Close';
 
 // Redux
@@ -85,7 +85,7 @@ class AddPost extends Component {
     return (
       <Fragment>
         <MyButton onClick={this.handleOpen} tip='Post'>
-          <AddIcon />
+          <PostAdd />
         </MyButton>
         <Dialog
           open={this.state.open}

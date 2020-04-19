@@ -16,7 +16,7 @@ import LocationOn from '@material-ui/icons/LocationOn';
 import LinkIcon from '@material-ui/icons/Link';
 import CalendarToday from '@material-ui/icons/CalendarToday';
 import AddAPhoto from '@material-ui/icons/AddAPhoto';
-import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
+import ExitToApp from '@material-ui/icons/ExitToApp';
 
 // Redux
 import { connect } from 'react-redux';
@@ -24,9 +24,7 @@ import { logoutUser, uploadImage } from '../../redux/actions/userActions';
 
 const styles = (theme) => ({
   ...theme.spreadThis,
-  logoutButton: {
-    float: 'right',
-  },
+  logoutButton: {},
 });
 
 class Profile extends Component {
@@ -60,14 +58,6 @@ class Profile extends Component {
       authenticated ? (
         <Paper className={classes.paper}>
           <div className={classes.profile}>
-            <MyButton
-              className={classes.logoutButton}
-              tip='Logout'
-              onClick={this.handleLogout}
-            >
-              <KeyboardReturn color='primary' />
-            </MyButton>
-
             <div className='image-wrapper'>
               <img className='profile-image' src={imageUrl} alt='User' />
               <input
@@ -118,6 +108,13 @@ class Profile extends Component {
               <span>Joined {dayjs(createdAt).format('MMM YYYY')}</span>
             </div>
             <EditDetails />
+            <MyButton
+              className={classes.logoutButton}
+              tip='Logout'
+              onClick={this.handleLogout}
+            >
+              <ExitToApp color='secondary' />
+            </MyButton>
           </div>
         </Paper>
       ) : (

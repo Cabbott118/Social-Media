@@ -21,7 +21,7 @@ import EditIcon from '@material-ui/icons/Edit';
 const styles = (theme) => ({
   ...theme.spreadThis,
   button: {
-    // float: 'right',
+    float: 'left',
   },
 });
 
@@ -81,7 +81,6 @@ class EditDetails extends Component {
           btnClassName={classes.button}
         >
           <EditIcon color='primary' />
-          <span style={{ fontSize: '12px' }}> Edit profile</span>
         </MyButton>
         <Dialog
           open={this.state.open}
