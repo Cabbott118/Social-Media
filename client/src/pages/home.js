@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Post from '../components/post/Post';
 import Profile from '../components/profile/Profile';
 import PropTypes from 'prop-types';
 import PostSkeleton from '../util/PostSkeleton';
+import Searchbar from '../components/layout/Searchbar';
 
 // MUI
 import Grid from '@material-ui/core/Grid';
@@ -24,14 +25,17 @@ export class home extends Component {
       posts.map((post) => <Post key={post.postId} post={post} />)
     );
     return (
-      <Grid container spacing={2}>
-        <Grid item sm={4} xs={12}>
-          <Profile />
+      <Fragment>
+        <Searchbar />
+        <Grid container spacing={2}>
+          <Grid item sm={4} xs={12}>
+            <Profile />
+          </Grid>
+          <Grid item sm={8} xs={12}>
+            {recentPostsMarkup}
+          </Grid>
         </Grid>
-        <Grid item sm={8} xs={12}>
-          {recentPostsMarkup}
-        </Grid>
-      </Grid>
+      </Fragment>
     );
   }
 }
