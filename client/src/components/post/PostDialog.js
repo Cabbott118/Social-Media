@@ -37,6 +37,7 @@ const styles = (theme) => ({
     padding: 20,
   },
   closeButton: {
+    cursor: 'pointer',
     position: 'absolute',
     left: '83%',
   },
