@@ -7,6 +7,13 @@ import Searchbar from '../components/layout/Searchbar';
 
 // MUI
 import Grid from '@material-ui/core/Grid';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Typography from '@material-ui/core/Typography';
+
+// Icons
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 // Redux
 import { connect } from 'react-redux';
@@ -30,8 +37,31 @@ export class home extends Component {
       <Fragment>
         <Grid container spacing={2}>
           <Grid item sm={4} xs={12}>
-            <Searchbar />
-            <Profile />
+            <ExpansionPanel>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls='panel1a-content'
+                id='panel1a-header'
+              >
+                <Typography>Search</Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <Searchbar />
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+
+            <ExpansionPanel>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls='panel2a-content'
+                id='panel2a-header'
+              >
+                <Typography>Profile</Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <Profile />
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
           </Grid>
           <Grid item sm={8} xs={12}>
             {recentPostsMarkup}
