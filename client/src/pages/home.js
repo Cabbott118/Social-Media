@@ -19,16 +19,18 @@ export class home extends Component {
 
   render() {
     const { posts, loading } = this.props.data;
+
     let recentPostsMarkup = loading ? (
       <PostSkeleton />
     ) : (
       posts.map((post) => <Post key={post.postId} post={post} />)
     );
+
     return (
       <Fragment>
-        <Searchbar />
         <Grid container spacing={2}>
           <Grid item sm={4} xs={12}>
+            <Searchbar />
             <Profile />
           </Grid>
           <Grid item sm={8} xs={12}>

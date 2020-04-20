@@ -25,7 +25,11 @@ export class Navbar extends Component {
       credentials: { handle },
     } = this.props.user;
 
+    // const homeLocation = (window.location.href = '/');
     const userUrl = `/users/${handle}`;
+
+    // if (userInput === '') return false;
+    // else window.location.href = `/users/${userInput}`;
 
     return (
       <AppBar>

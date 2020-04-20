@@ -1,44 +1,46 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
+import axios from 'axios';
 
 // MUI
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-// import CardMedia from '@material-ui/core/CardMedia';
 import CircularProgress from '@material-ui/core/CircularProgress';
-// import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-
-// Icons
-// import Search from '@material-ui/icons/Search';
 
 // Redux
 import { connect } from 'react-redux';
+import { getUserData } from '../../redux/actions/dataActions';
 
 const styles = (theme) => ({
   ...theme.spreadThis,
   searchBox: {
     marginBottom: 10,
   },
-  textField: {
-    width: '68%',
-    paddingRight: 15,
-  },
 });
 
 class Searchbar extends Component {
   state = {
     search: '',
+    foundUser: '',
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     const userInput = this.state.search;
 
-    if (userInput === '') return false;
-    else window.location.href = `/users/${userInput}`;
+    this.props.getUserData(userInput);
+    axios
+      .get(`/user/${userInput}`)
+      .then((res) => {
+        this.setState({
+          foundUser: res.data.user,
+        });
+        console.log(this.state.foundUser);
+      })
+      .catch((err) => console.log(err));
   };
 
   handleChange = (e) => {
@@ -50,7 +52,6 @@ class Searchbar extends Component {
   render() {
     const {
       classes,
-
       UI: { loading },
     } = this.props;
     return (
@@ -63,27 +64,31 @@ class Searchbar extends Component {
               onSubmit={this.handleSubmit}
             >
               <TextField
-                id='search'
+                id='outlined-size-small'
                 name='search'
                 type='text'
                 label='Search for user'
+                variant='outlined'
+                size='small'
                 className={classes.textField}
+                fullWidth
                 value={this.state.search}
                 onChange={this.handleChange}
-                //   fullWidth
               />
-              <Button
-                type='submit'
-                variant='contained'
-                color='primary'
-                className={classes.button}
-                disabled={loading}
-              >
-                Search
-                {loading && (
-                  <CircularProgress size={30} className={classes.progress} />
-                )}
-              </Button>
+              <div className={classes.buttons}>
+                <Button
+                  type='submit'
+                  variant='contained'
+                  color='primary'
+                  className={classes.button}
+                  disabled={loading}
+                >
+                  Search
+                  {loading && (
+                    <CircularProgress size={30} className={classes.progress} />
+                  )}
+                </Button>
+              </div>
             </form>
           </CardContent>
         </Card>
@@ -93,11 +98,15 @@ class Searchbar extends Component {
 }
 
 Searchbar.propTypes = {
+  getUserData: PropTypes.func.isRequired,
   UI: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   UI: state.UI,
+  data: state.data,
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(Searchbar));
+export default connect(mapStateToProps, { getUserData })(
+  withStyles(styles)(Searchbar)
+);
