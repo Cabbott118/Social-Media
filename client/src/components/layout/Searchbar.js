@@ -105,8 +105,7 @@ class Searchbar extends Component {
                 fullWidth
                 value={this.state.search}
                 onChange={this.handleChange}
-                helperText={errors.error}
-                error={errors.error ? true : false}
+                helperText='IMPORTANT: Searches are case-sensitive. As such, searching a non-existent user may result in errors.'
               />
               <div className={classes.buttons}>
                 <Button
