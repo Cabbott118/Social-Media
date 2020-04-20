@@ -63,6 +63,7 @@ class App extends Component {
                     path='/users/:handle/post/:postId'
                     component={user}
                   />
+                  <Route path='*' component={home} />
                 </Switch>
               </div>
             </Router>

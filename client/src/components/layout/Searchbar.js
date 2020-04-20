@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import axios from 'axios';
@@ -9,29 +10,40 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
+import MuiLink from '@material-ui/core/Link';
 
 // Redux
 import { connect } from 'react-redux';
-import { getUserData } from '../../redux/actions/dataActions';
 
 const styles = (theme) => ({
   ...theme.spreadThis,
   searchBox: {
     marginBottom: 10,
+    width: '100%',
   },
 });
 
 class Searchbar extends Component {
-  state = {
-    search: '',
-    foundUser: '',
-  };
+  constructor() {
+    super();
+    this.state = {
+      search: '',
+      foundUser: '',
+      errors: {},
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.UI.errors) {
+      this.setState({
+        errors: nextProps.UI.errors,
+      });
+    }
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
     const userInput = this.state.search;
-
-    this.props.getUserData(userInput);
     axios
       .get(`/user/${userInput}`)
       .then((res) => {
@@ -53,6 +65,26 @@ class Searchbar extends Component {
       classes,
       UI: { loading },
     } = this.props;
+
+    const {
+      errors,
+      foundUser: { handle },
+    } = this.state;
+
+    const userFound = (
+      <div style={{ marginTop: 10 }}>
+        <MuiLink
+          component={Link}
+          to={`/users/${handle}`}
+          color='primary'
+          variant='body1'
+        >
+          {handle}
+        </MuiLink>
+      </div>
+    );
+    let userNotFound;
+
     return (
       <div className={classes.searchBox}>
         <Card>
@@ -73,10 +105,8 @@ class Searchbar extends Component {
                 fullWidth
                 value={this.state.search}
                 onChange={this.handleChange}
-                helperText='This feature is still under development. 
-                Errors may occur. 
-                Search queries must directly match usernames. 
-                Ex: searching "Cabbaaage" will give results, but "cabbaaage" will not. '
+                helperText={errors.error}
+                error={errors.error ? true : false}
               />
               <div className={classes.buttons}>
                 <Button
@@ -93,6 +123,7 @@ class Searchbar extends Component {
                 </Button>
               </div>
             </form>
+            {handle ? userFound : userNotFound}
           </CardContent>
         </Card>
       </div>
@@ -101,7 +132,6 @@ class Searchbar extends Component {
 }
 
 Searchbar.propTypes = {
-  getUserData: PropTypes.func.isRequired,
   UI: PropTypes.object.isRequired,
 };
 
@@ -110,6 +140,4 @@ const mapStateToProps = (state) => ({
   data: state.data,
 });
 
-export default connect(mapStateToProps, { getUserData })(
-  withStyles(styles)(Searchbar)
-);
+export default connect(mapStateToProps)(withStyles(styles)(Searchbar));
