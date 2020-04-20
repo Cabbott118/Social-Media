@@ -38,7 +38,6 @@ class Searchbar extends Component {
         this.setState({
           foundUser: res.data.user,
         });
-        console.log(this.state.foundUser);
       })
       .catch((err) => console.log(err));
   };
@@ -74,6 +73,10 @@ class Searchbar extends Component {
                 fullWidth
                 value={this.state.search}
                 onChange={this.handleChange}
+                helperText='This feature is still under development. 
+                Errors may occur. 
+                Search queries must directly match usernames. 
+                Ex: searching "Cabbaaage" will give results, but "cabbaaage" will not. '
               />
               <div className={classes.buttons}>
                 <Button
