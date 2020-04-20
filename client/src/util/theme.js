@@ -51,6 +51,7 @@ export default {
       marginBottom: 20,
     },
     paper: {
+      width: '90%',
       padding: 20,
     },
     accountForm: {
