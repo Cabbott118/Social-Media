@@ -11,8 +11,27 @@ import {
   SET_POST,
   STOP_LOADING_UI,
   SUBMIT_COMMENT,
+  GET_USERNAMES,
 } from '../types';
 import axios from 'axios';
+
+export const getUsernames = (userInput) => (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  axios
+    .get('/username')
+    .then((res) => {
+      dispatch({
+        type: GET_USERNAMES,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: GET_USERNAMES,
+        payload: [],
+      });
+    });
+};
 
 export const getPosts = () => (dispatch) => {
   dispatch({ type: LOADING_DATA });

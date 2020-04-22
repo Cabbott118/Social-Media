@@ -7,11 +7,13 @@ import {
   DELETE_POST,
   LOADING_DATA,
   SUBMIT_COMMENT,
+  GET_USERNAMES,
 } from '../types';
 
 const initialState = {
   posts: [],
   post: {},
+  usernames: [],
   loading: false,
 };
 
@@ -21,6 +23,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: true,
+      };
+    case GET_USERNAMES:
+      return {
+        ...state,
+        usernames: action.payload,
+        loading: false,
       };
     case SET_POSTS:
       return {

@@ -20,3 +20,4 @@ export const UNLIKE_POST = 'UNLIKE_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const ADD_POST = 'ADD_POST';
 export const SUBMIT_COMMENT = 'SUBMIT_COMMENT';
+export const GET_USERNAMES = 'GET_USERNAMES';

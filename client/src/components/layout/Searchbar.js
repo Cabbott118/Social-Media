@@ -14,6 +14,7 @@ import MuiLink from '@material-ui/core/Link';
 
 // Redux
 import { connect } from 'react-redux';
+import { getUsernames } from '../../redux/actions/dataActions';
 
 const styles = (theme) => ({
   ...theme.spreadThis,
@@ -28,7 +29,6 @@ class Searchbar extends Component {
     super();
     this.state = {
       search: '',
-      foundUser: '',
       errors: {},
     };
   }
@@ -43,13 +43,12 @@ class Searchbar extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const userInput = this.state.search;
+    const { search, usernames, userMatch } = this.state;
+    this.props.getUsernames(search);
     axios
-      .get(`/user/${userInput}`)
+      .get('/username')
       .then((res) => {
-        this.setState({
-          foundUser: res.data.user,
-        });
+        console.log(this.props.data.usernames);
       })
       .catch((err) => console.log(err));
   };
@@ -64,26 +63,23 @@ class Searchbar extends Component {
     const {
       classes,
       UI: { loading },
+      usernames,
     } = this.props;
 
-    const {
-      errors,
-      foundUser: { handle },
-    } = this.state;
+    console.log(usernames);
 
     const userFound = (
       <div style={{ marginTop: 10 }}>
-        <MuiLink
+        {/* <MuiLink
           component={Link}
           to={`/users/${handle}`}
           color='primary'
           variant='body1'
         >
           {handle}
-        </MuiLink>
+        </MuiLink> */}
       </div>
     );
-    let userNotFound;
 
     return (
       <div className={classes.searchBox}>
@@ -122,7 +118,6 @@ class Searchbar extends Component {
                 </Button>
               </div>
             </form>
-            {handle ? userFound : userNotFound}
           </CardContent>
         </Card>
       </div>
@@ -132,6 +127,7 @@ class Searchbar extends Component {
 
 Searchbar.propTypes = {
   UI: PropTypes.object.isRequired,
+  getUsernames: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -139,4 +135,6 @@ const mapStateToProps = (state) => ({
   data: state.data,
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(Searchbar));
+export default connect(mapStateToProps, { getUsernames })(
+  withStyles(styles)(Searchbar)
+);
