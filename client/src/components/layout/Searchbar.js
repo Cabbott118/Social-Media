@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import axios from 'axios';
 
 // MUI
 import Button from '@material-ui/core/Button';
@@ -29,8 +28,14 @@ class Searchbar extends Component {
     super();
     this.state = {
       search: '',
+      foundUser: '',
+      noResults: false,
       errors: {},
     };
+  }
+
+  componentDidMount() {
+    this.props.getUsernames();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -43,14 +48,17 @@ class Searchbar extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { search, usernames, userMatch } = this.state;
-    this.props.getUsernames(search);
-    axios
-      .get('/username')
-      .then((res) => {
-        console.log(this.props.data.usernames);
-      })
-      .catch((err) => console.log(err));
+    const { usernames } = this.props.data;
+    const { search } = this.state;
+
+    for (let i = 0; i < usernames.length; i++) {
+      if (search === usernames[i].handle) {
+        this.setState({
+          foundUser: usernames[i].handle,
+        });
+      }
+    }
+    // TODO: set state to null after search
   };
 
   handleChange = (e) => {
@@ -60,24 +68,23 @@ class Searchbar extends Component {
   };
 
   render() {
+    const { foundUser, noResults } = this.state;
+    console.log(noResults);
     const {
       classes,
       UI: { loading },
-      usernames,
     } = this.props;
-
-    console.log(usernames);
 
     const userFound = (
       <div style={{ marginTop: 10 }}>
-        {/* <MuiLink
+        <MuiLink
           component={Link}
-          to={`/users/${handle}`}
+          to={`/users/${foundUser}`}
           color='primary'
           variant='body1'
         >
-          {handle}
-        </MuiLink> */}
+          {foundUser}
+        </MuiLink>
       </div>
     );
 
@@ -94,14 +101,14 @@ class Searchbar extends Component {
                 id='outlined-size-small'
                 name='search'
                 type='text'
-                label='Search for user'
+                label='Search by username'
                 variant='outlined'
                 size='small'
                 className={classes.textField}
                 fullWidth
                 value={this.state.search}
                 onChange={this.handleChange}
-                helperText='IMPORTANT: Searches are case-sensitive. As such, searching a non-existent user may result in errors.'
+                helperText='A link to searched user will be shown below.'
               />
               <div className={classes.buttons}>
                 <Button
@@ -118,6 +125,7 @@ class Searchbar extends Component {
                 </Button>
               </div>
             </form>
+            {userFound}
           </CardContent>
         </Card>
       </div>
