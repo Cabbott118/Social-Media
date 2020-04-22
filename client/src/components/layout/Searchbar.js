@@ -29,7 +29,8 @@ class Searchbar extends Component {
     this.state = {
       search: '',
       foundUser: '',
-      noResults: false,
+      found: false,
+      notFound: false,
       errors: {},
     };
   }
@@ -49,14 +50,21 @@ class Searchbar extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { usernames } = this.props.data;
-    const { search } = this.state;
+    const { search, found } = this.state;
 
     for (let i = 0; i < usernames.length; i++) {
       if (search === usernames[i].handle) {
         this.setState({
+          found: true,
           foundUser: usernames[i].handle,
         });
       }
+    }
+
+    if (found === false) {
+      this.setState({
+        notFound: true,
+      });
     }
     // TODO: set state to null after search
   };
@@ -68,12 +76,23 @@ class Searchbar extends Component {
   };
 
   render() {
-    const { foundUser, noResults } = this.state;
-    console.log(noResults);
+    const { foundUser, found, notFound } = this.state;
+    console.log(this.state);
+
     const {
       classes,
       UI: { loading },
     } = this.props;
+
+    const userNotFound = (
+      <div style={{ marginTop: 10 }}>
+        <p>
+          Sorry, we couldn't find anyone with that username. Make sure you're
+          spelling the username correctly.
+        </p>
+        <p>HINT: Usernames are stored case-sensitive.</p>
+      </div>
+    );
 
     const userFound = (
       <div style={{ marginTop: 10 }}>
@@ -125,7 +144,8 @@ class Searchbar extends Component {
                 </Button>
               </div>
             </form>
-            {userFound}
+            {found === true ? userFound : null}
+            {found === false && notFound === true ? userNotFound : null}
           </CardContent>
         </Card>
       </div>
