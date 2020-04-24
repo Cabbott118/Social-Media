@@ -21,6 +21,10 @@ const styles = (theme) => ({
     marginBottom: 10,
     width: '100%',
   },
+  searchedUserImg: {
+    height: '100px',
+    borderRadius: '50%',
+  },
 });
 
 class Searchbar extends Component {
@@ -29,6 +33,7 @@ class Searchbar extends Component {
     this.state = {
       search: '',
       foundUser: '',
+      userImg: '',
       found: false,
       notFound: false,
       errors: {},
@@ -53,10 +58,12 @@ class Searchbar extends Component {
     const { search, found } = this.state;
 
     for (let i = 0; i < usernames.length; i++) {
-      if (search === usernames[i].handle) {
+      if (search === usernames[i].data.handle) {
         this.setState({
           found: true,
-          foundUser: usernames[i].handle,
+          foundUser: usernames[i].data.handle,
+          userImg: usernames[i].data.imageUrl,
+          search: '',
         });
       }
     }
@@ -64,9 +71,9 @@ class Searchbar extends Component {
     if (found === false) {
       this.setState({
         notFound: true,
+        search: '',
       });
     }
-    // TODO: set state to null after search
   };
 
   handleChange = (e) => {
@@ -76,9 +83,9 @@ class Searchbar extends Component {
   };
 
   render() {
-    const { foundUser, found, notFound } = this.state;
-    console.log(this.state);
+    console.log('PROPS:', this.props);
 
+    const { foundUser, userImg, found, notFound } = this.state;
     const {
       classes,
       UI: { loading },
@@ -100,8 +107,13 @@ class Searchbar extends Component {
           component={Link}
           to={`/users/${foundUser}`}
           color='primary'
-          variant='body1'
+          variant='h5'
         >
+          <img
+            className={classes.searchedUserImg}
+            src={userImg}
+            alt='Searched user'
+          />
           {foundUser}
         </MuiLink>
       </div>

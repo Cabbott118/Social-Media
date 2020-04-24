@@ -15,11 +15,12 @@ import {
 } from '../types';
 import axios from 'axios';
 
-export const getUsernames = (userInput) => (dispatch) => {
+export const getUsernames = () => (dispatch) => {
   dispatch({ type: LOADING_DATA });
   axios
     .get('/username')
     .then((res) => {
+      console.log('RES:', res);
       dispatch({
         type: GET_USERNAMES,
         payload: res.data,

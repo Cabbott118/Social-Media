@@ -50,6 +50,7 @@ class Profile extends Component {
   };
 
   render() {
+    console.log('PROFILE:', this.props.user);
     const {
       classes,
       user: {
