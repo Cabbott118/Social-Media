@@ -20,7 +20,6 @@ export const getUsernames = () => (dispatch) => {
   axios
     .get('/username')
     .then((res) => {
-      console.log('RES:', res);
       dispatch({
         type: GET_USERNAMES,
         payload: res.data,

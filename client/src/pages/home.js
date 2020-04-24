@@ -25,7 +25,6 @@ export class home extends Component {
   }
 
   render() {
-    console.log('POSTS:', this.props.data);
     const { posts, loading } = this.props.data;
 
     let recentPostsMarkup = loading ? (

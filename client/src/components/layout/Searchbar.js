@@ -22,7 +22,9 @@ const styles = (theme) => ({
     width: '100%',
   },
   searchedUserImg: {
-    height: '100px',
+    height: '75px',
+    width: '75px',
+    objectFit: 'cover',
     borderRadius: '50%',
   },
 });
@@ -83,8 +85,6 @@ class Searchbar extends Component {
   };
 
   render() {
-    console.log('PROPS:', this.props);
-
     const { foundUser, userImg, found, notFound } = this.state;
     const {
       classes,
