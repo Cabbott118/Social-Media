@@ -12,6 +12,8 @@ After the data has come through, the News Feed will be shown. Posts are listed i
 
 Users will have access to the **News Feed** before logging in, but any actions taken other than viewing another user's account will direct them to the **Login** page:
 
+# Login, Signup & Account
+
 ![Login](./readmeimgs/Social.JPG)
 
 If the user needs to register, links to the **Sign Up** page will take them to:
@@ -22,6 +24,8 @@ After logging in, the user can view and edit their own details by selecting the 
 
 ![Account](./readmeimgs/Account.JPG)
 
+# Viewing another user's page
+
 To view another user's page, simply select their username within the **News Feed**, or **Search** dropdown menu:
 
 ![Search](./readmeimgs/Search.JPG)
@@ -30,9 +34,13 @@ After selecting a user's name, the display will switch to show their personal de
 
 ![Account2](./readmeimgs/Account2.JPG)
 
+# Likes and Comments
+
 Users can also **Like and Comment** on a **Post**:
 
 ![Comments](./readmeimgs/Comments.JPG)
+
+# Navbar
 
 If a user recieves any **Likes and/or Comments**, they will be given a notification, accessible via the **Navbar**
 
