@@ -38,7 +38,7 @@ If a user recieves any **Likes and/or Comments**, they will be given a notificat
 
 ![Navicons](./readmeimgs/Navicons.JPG)
 
-![Notifications](./readmeimgs/Notifications.JPG)
+![Notifications](./readmeimgs/Notification.JPG)
 
 In addition to housing the **Notifications** link, the **Navbar** also allows users to **Post** directly:
 
